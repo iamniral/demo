@@ -1,18 +1,26 @@
 import time
 from appium import webdriver
+from appium.options.common import AppiumOptions
 
+# Step 1: Create an AppiumOptions object
+options = AppiumOptions()
 
+# Step 2: Set the desired capabilities
+options.set_capability('platformName', 'Android')
+options.set_capability('appium:platformVersion', '16.0')
+options.set_capability('appium:deviceName', 'emulator-5554')
+options.set_capability('appium:browserName', 'chrome')
+options.set_capability('appium:automationName', 'UiAutomator2')
+# Add the capability to enable automatic Chromedriver download
+options.set_capability('appium:chromedriverAutodownload', True)
 
-desired_caps = dict(
-    deviceName='2a50ee87',
-    platformName='Android',
-    browserName='chrome',
-)
+# Step 3: Connect to the Appium server and create a new session
+driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', options=options)
 
-driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
-
-driver.get("http://www.google.com")
+# Your test commands
+driver.get("https://www.google.com/")
 print(driver.title)
 time.sleep(2)
+
+# Step 4: End the driver session
 driver.quit()
-driver.back()
