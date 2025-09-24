@@ -1,6 +1,8 @@
 import time
 from appium import webdriver
 from appium.options.common import AppiumOptions
+from selenium.webdriver.common.by import By
+from appium.webdriver.common.touch_action import TouchAction
 
 # Step 1: Create an AppiumOptions object
 options = AppiumOptions()
@@ -22,9 +24,34 @@ driver = webdriver.Remote('http://localhost:4723', options=options)
 
 print("App has been installed and launched successfully!")
 
+time.sleep(5)
+
 # Your automation code goes here
-# Example: interacting with elements in your app
+# driver.find_element(By.ID, 'com.android.calendar.AllInOneActivity').click()
+# driver.find_element(By.CLASS_NAME, 'com.android.calendar.AllInOneActivity').click()
+# driver.find_element(By.NAME, "com.android.calendar.AllInOneActivity").click()
+# driver.find_element(By.XPATH, "//android.widget.TextInput[@index='1']").click()
+# driver.find_element(By.TAG_NAME, "").click()
+
+#Swipe from left to right on intro screen
+
+# Get the device screen size
+screen_size = driver.get_window_size()
+screen_width = screen_size['width']
+screen_height = screen_size['height']
+
+# Define the start and end coordinates for the swipe
+start_x = int(screen_width * 0.8)
+end_x = int(screen_height * 0.4)
+y = int(screen_height * 0.5)
+
+# Perform the swipe gesture from left to right
+print("Swipe from left to right")
+TouchAction(driver).press(x=start_x, y=y).move_to(x=end_x, y=y).release().perform()
+print("Swipe complete.")
+# driver.swipe(start_x, y, end_x, y, 800) # The last parameter is the duration in milliseconds
+
 
 # End the driver session
 time.sleep(5)
-driver.quit()
+# driver.quit()
