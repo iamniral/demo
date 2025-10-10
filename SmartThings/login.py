@@ -28,23 +28,41 @@ print("Smart Things App Launched successfully!")
 
 #Navigation till home screen
 title_text = driver.find_element(By.XPATH, '//android.widget.TextView[@resource-id="com.samsung.android.oneconnect:id/introTitle"]').text
-print(title_text)
+print(f"First Page title is: {title_text}")
+
 driver.find_element(By.ID, 'com.samsung.android.oneconnect:id/intro_allow_button').click()
 driver.find_element(By.XPATH, f'//android.widget.Button[@text = "More"]').click()
 driver.find_element(By.XPATH, f'//android.widget.Button[@text = "Continue"]').click()
-time.sleep(25)
+time.sleep(23)
 driver.find_element(By.XPATH, f'//android.widget.Button[@text = "Start SmartThings"]').click()
 time.sleep(2)
 
 driver.find_element(By.XPATH, f'//*[contains(@text,"While using the app")]').click()
-time.sleep(2)
+time.sleep(3)
 driver.find_element(By.XPATH, '//android.widget.Button[@resource-id="com.android.permissioncontroller:id/permission_allow_button"]').click()
-time.sleep(2)
+time.sleep(3)
 driver.find_element(By.XPATH, '//android.widget.Button[@resource-id="com.android.permissioncontroller:id/permission_allow_button"]').click()
-
+time.sleep(3)
 home_title = driver.find_element(By.XPATH, '//android.widget.TextView[@resource-id="com.samsung.android.oneconnect:id/title"]').text
-print(home_title)
+print(f"The home screen title is: {home_title}")
+time.sleep(3)
+###################################################
+
+driver.find_element(By.ID,'com.samsung.android.oneconnect:id/signin_btn').click()
+time.sleep(10)
+driver.find_element(By.XPATH,'//android.widget.EditText[@resource-id="iptLgnPlnID"]').send_keys('iamniralshah@gmail.com')
+time.sleep(3)
+driver.find_element(By.XPATH,'//android.widget.Button[@resource-id="signInButton"]').click()
+time.sleep(3)
+driver.find_element(By.XPATH,'//android.widget.EditText[@resource-id="iptLgnPlnPD"]').send_keys('Vasupujy@3')
+time.sleep(3)
+driver.find_element(By.XPATH, '//android.widget.Button[@resource-id="signInButton"]').click()
+time.sleep(15)
+home_screen = driver.find_element(By.XPATH,'//android.widget.TextView[@resource-id="com.samsung.android.oneconnect:id/title"]').text
+print(f"Home page title is: {home_screen}")
+print("Login Successfully!")
+
 
 #End of driver session
-time.sleep(5)
+time.sleep(2)
 driver.quit()
