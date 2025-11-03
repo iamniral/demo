@@ -57,7 +57,3 @@ driver.find_element(By.ID, 'com.panasonic.in.miraie:id/loginButton').click()
 # End the driver session
 time.sleep(5)
 driver.quit()
-
-driver.find_element(By.LINK_)
-
-print("Vishal")
