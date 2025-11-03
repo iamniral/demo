@@ -2,10 +2,11 @@ import time
 from appium import webdriver
 from appium.options.common import AppiumOptions
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.driver_finder import DriverFinder
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from locators import SmartThingsLocators
 
+# --- Capability Setup ---
 options = AppiumOptions()
 options.set_capability('platformName', 'Android')
 options.set_capability('appium:deviceName', 'emulator-5554')
@@ -14,8 +15,6 @@ options.set_capability('appium:automationName', 'UiAutomator2')
 
 # --- CLEANSED LAUNCH CAPABILITIES ---
 options.set_capability('appium:appPackage', 'com.samsung.android.oneconnect')
-
-# Use wildcard on appWaitActivity to successfully wait for any activity to load
 options.set_capability('appium:appWaitActivity', '*')
 options.set_capability('appium:appWaitDuration', 30000)
 
@@ -29,57 +28,62 @@ driver = webdriver.Remote('http://localhost:4723', options=options)
 
 print("Smart Things App Launched successfully!")
 
+# --- Initial Navigation ---
 # Navigation till home screen
-title_text = driver.find_element(By.XPATH, '//android.widget.TextView[@resource-id="com.samsung.android.oneconnect:id/introTitle"]').text
+title_text = driver.find_element(*SmartThingsLocators.INTRO_TITLE).text
 print(f"First Page title is: {title_text}")
 
-driver.find_element(By.ID, 'com.samsung.android.oneconnect:id/intro_allow_button').click()
-driver.find_element(By.XPATH, f'//android.widget.Button[@text = "More"]').click()
-driver.find_element(By.XPATH, f'//android.widget.Button[@text = "Continue"]').click()
-time.sleep(23) # Added for potential long loading/login process
-driver.find_element(By.XPATH, f'//android.widget.Button[@text = "Start SmartThings"]').click()
+driver.find_element(*SmartThingsLocators.INTRO_ALLOW_BUTTON).click()
+driver.find_element(*SmartThingsLocators.MORE_BUTTON).click()
+driver.find_element(*SmartThingsLocators.CONTINUE_BUTTON).click()
+time.sleep(23) # Waiting for a potentially long loading screen
+driver.find_element(*SmartThingsLocators.START_SMARTTHINGS_BUTTON).click()
 time.sleep(2)
 
-# Allow permissions
-driver.find_element(By.XPATH, f'//*[contains(@text,"While using the app")]').click()
+# --- Allow Permissions ---
+driver.find_element(*SmartThingsLocators.WHILE_USING_APP_PERMISSION).click()
 time.sleep(3)
-driver.find_element(By.XPATH, '//android.widget.Button[@resource-id="com.android.permissioncontroller:id/permission_allow_button"]').click()
+# Permission 1
+driver.find_element(*SmartThingsLocators.PERMISSION_ALLOW_BUTTON).click()
 time.sleep(3)
-driver.find_element(By.XPATH, '//android.widget.Button[@resource-id="com.android.permissioncontroller:id/permission_allow_button"]').click()
+# Permission 2
+driver.find_element(*SmartThingsLocators.PERMISSION_ALLOW_BUTTON).click()
 time.sleep(3)
 
-home_title = driver.find_element(By.XPATH, '//android.widget.TextView[@resource-id="com.samsung.android.oneconnect:id/title"]').text
+home_title = driver.find_element(*SmartThingsLocators.HOME_TITLE).text
 print(f"The home screen title is: {home_title}")
 time.sleep(3)
 
-# Find your account ID
-driver.find_element(By.ID,'com.samsung.android.oneconnect:id/signin_btn').click()
-time.sleep(10)
-driver.find_element(By.XPATH,'//android.widget.TextView[@text="Find ID"]').click()
+# --- Find Account ID Flow ---
+driver.find_element(*SmartThingsLocators.SIGN_IN_BUTTON).click()
+time.sleep(15)
+driver.find_element(*SmartThingsLocators.FIND_ID_LINK).click()
 time.sleep(5)
-driver.find_element(By.XPATH,'//android.widget.EditText[@resource-id="givenName"]').send_keys('Niral')
+driver.find_element(*SmartThingsLocators.GIVEN_NAME_INPUT).send_keys('Niral')
 time.sleep(5)
-driver.find_element(By.XPATH,'//android.widget.EditText[@resource-id="familyName"]').send_keys('Shah')
+driver.find_element(*SmartThingsLocators.FAMILY_NAME_INPUT).send_keys('Shah')
 time.sleep(5)
-driver.find_element(By.XPATH,'//android.widget.EditText[@resource-id="day"]').send_keys('21')
+driver.find_element(*SmartThingsLocators.DAY_INPUT).send_keys('21')
 time.sleep(5)
-driver.find_element(By.XPATH, '//android.view.View[@resource-id="month"]').click()
+driver.find_element(*SmartThingsLocators.MONTH_DROPDOWN).click()
 time.sleep(5)
-# Select 'July' from the month dropdown using an explicit wait
-WebDriverWait(driver, 10).until(
-    EC.element_to_be_clickable((By.XPATH, '//android.widget.CheckedTextView[@text="July"]'))
-).click()
-driver.find_element(By.XPATH,'//android.widget.EditText[@resource-id="year"]').send_keys('1993')
-time.sleep(5)
-driver.find_element(By.XPATH,'//android.widget.Button[@resource-id="findIdButton"]').click()
 
-# Assertion step
-time.sleep(2)
-Found_ID = driver.find_element(By.XPATH, '//android.widget.TextView[@text="We found 1 Email ID(s)."]')
+# FIXED: EC method does NOT use the * unpacking operator
+WebDriverWait(driver, 10).until(
+    EC.element_to_be_clickable(SmartThingsLocators.JULY_OPTION)
+).click()
+
+driver.find_element(*SmartThingsLocators.YEAR_INPUT).send_keys('1993')
+time.sleep(5)
+driver.find_element(*SmartThingsLocators.FIND_ID_FINAL_BUTTON).click()
+
+# --- Assertion Step ---
+time.sleep(5)
+Found_ID_Element = driver.find_element(*SmartThingsLocators.FOUND_ID_MESSAGE)
 EXPECTED_TEXT = "We found 1 Email ID(s)."
-assert Found_ID.text == EXPECTED_TEXT
-print('Found 1 Email ID(s) in this app.')
+assert Found_ID_Element.text == EXPECTED_TEXT
+print('Found 1 Email ID(s) in this app. Assertion passed.')
 
 # End of driver session
-driver.find_element(By.XPATH, '//android.widget.Button[@text="Sign in now"]').click()
+driver.find_element(*SmartThingsLocators.SIGN_IN_NOW_BUTTON).click()
 driver.quit()

@@ -2,6 +2,7 @@ import time
 from appium import webdriver
 from appium.options.common import AppiumOptions
 from selenium.webdriver.common.by import By
+from locators import SmartThingsLocators
 
 
 options = AppiumOptions()
@@ -28,42 +29,42 @@ driver = webdriver.Remote('http://localhost:4723', options=options)
 print("Smart Things App Launched successfully!")
 
 # Navigation till home screen
-title_text = driver.find_element(By.XPATH, '//android.widget.TextView[@resource-id="com.samsung.android.oneconnect:id/introTitle"]').text
+title_text = driver.find_element(*SmartThingsLocators.INTRO_TITLE).text
 print(f"First Page title is: {title_text}")
 
-driver.find_element(By.ID, 'com.samsung.android.oneconnect:id/intro_allow_button').click()
-driver.find_element(By.XPATH, f'//android.widget.Button[@text = "More"]').click()
-driver.find_element(By.XPATH, f'//android.widget.Button[@text = "Continue"]').click()
+driver.find_element(*SmartThingsLocators.INTRO_ALLOW_BUTTON).click()
+driver.find_element(*SmartThingsLocators.MORE_BUTTON).click()
+driver.find_element(*SmartThingsLocators.CONTINUE_BUTTON).click()
 time.sleep(23)
-driver.find_element(By.XPATH, f'//android.widget.Button[@text = "Start SmartThings"]').click()
+driver.find_element(*SmartThingsLocators.START_SMARTTHINGS_BUTTON).click()
 time.sleep(10)
 
 # Allow app permissions
-driver.find_element(By.XPATH, f'//*[contains(@text,"While using the app")]').click()
+driver.find_element(*SmartThingsLocators.WHILE_USING_APP_PERMISSION).click()
 time.sleep(3)
-driver.find_element(By.XPATH, '//android.widget.Button[@resource-id="com.android.permissioncontroller:id/permission_allow_button"]').click()
+driver.find_element(*SmartThingsLocators.PERMISSION_ALLOW_BUTTON).click()
 time.sleep(3)
-driver.find_element(By.XPATH, '//android.widget.Button[@resource-id="com.android.permissioncontroller:id/permission_allow_button"]').click()
+driver.find_element(*SmartThingsLocators.PERMISSION_ALLOW_BUTTON).click()
 time.sleep(3)
 
-home_title = driver.find_element(By.XPATH, '//android.widget.TextView[@resource-id="com.samsung.android.oneconnect:id/title"]').text
+home_title = driver.find_element(*SmartThingsLocators.HOME_TITLE).text
 print(f"The home screen title is: {home_title}")
 time.sleep(3)
 
 # App Signin
-driver.find_element(By.ID,'com.samsung.android.oneconnect:id/signin_btn').click()
+driver.find_element(*SmartThingsLocators.SIGN_IN_BUTTON).click()
 time.sleep(12)
 # Enter email ID
-driver.find_element(By.XPATH, '//android.widget.EditText[@resource-id="iptLgnPlnID"]').send_keys('iamniralshah@gmail.com')
+driver.find_element(*SmartThingsLocators.EMAIL_INPUT).send_keys('iamniralshah@gmail.com')
 time.sleep(5)
-driver.find_element(By.XPATH,'//android.widget.Button[@resource-id="signInButton"]').click()
+driver.find_element(*SmartThingsLocators.SIGN_IN_FINAL_BUTTON).click()
 time.sleep(5)
 # Enter password
-driver.find_element(By.XPATH,'//android.widget.EditText[@resource-id="iptLgnPlnPD"]').send_keys('Vasupujy@3')
+driver.find_element(*SmartThingsLocators.PASSWORD_INPUT).send_keys('Vasupujy@3')
 time.sleep(5)
-driver.find_element(By.XPATH, '//android.widget.Button[@resource-id="signInButton"]').click()
+driver.find_element(*SmartThingsLocators.SIGN_IN_NOW_BUTTON).click()
 time.sleep(15)
-home_screen = driver.find_element(By.XPATH,'//android.widget.TextView[@resource-id="com.samsung.android.oneconnect:id/title"]').text
+home_screen = driver.find_element(*SmartThingsLocators.HOME_TITLE).text
 print(f"Home page title is: {home_screen}")
 print("Login Successfully!")
 
