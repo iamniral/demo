@@ -36,9 +36,10 @@ print(f"First Page title is: {title_text}")
 driver.find_element(*SmartThingsLocators.INTRO_ALLOW_BUTTON).click()
 driver.find_element(*SmartThingsLocators.MORE_BUTTON).click()
 driver.find_element(*SmartThingsLocators.CONTINUE_BUTTON).click()
-time.sleep(23) # Waiting for a potentially long loading screen
-driver.find_element(*SmartThingsLocators.START_SMARTTHINGS_BUTTON).click()
-time.sleep(2)
+time.sleep(5)
+# driver.find_element(*SmartThingsLocators.START_SMARTTHINGS_BUTTON).click()
+driver.find_element(*SmartThingsLocators.SKIP_BUTTON).click()
+time.sleep(5)
 
 # --- Allow Permissions ---
 driver.find_element(*SmartThingsLocators.WHILE_USING_APP_PERMISSION).click()
@@ -68,7 +69,6 @@ time.sleep(5)
 driver.find_element(*SmartThingsLocators.MONTH_DROPDOWN).click()
 time.sleep(5)
 
-# FIXED: EC method does NOT use the * unpacking operator
 WebDriverWait(driver, 10).until(
     EC.element_to_be_clickable(SmartThingsLocators.JULY_OPTION)
 ).click()

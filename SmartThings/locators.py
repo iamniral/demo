@@ -13,6 +13,7 @@ class SmartThingsLocators:
     MORE_BUTTON = (By.XPATH, '//android.widget.Button[@text = "More"]')
     CONTINUE_BUTTON = (By.XPATH, '//android.widget.Button[@text = "Continue"]')
     START_SMARTTHINGS_BUTTON = (By.XPATH, '//android.widget.Button[@text = "Start SmartThings"]')
+    SKIP_BUTTON = (By.ID, 'com.samsung.android.oneconnect:id/cancel')
 
     # --- Permissions ---
     WHILE_USING_APP_PERMISSION = (By.XPATH, '//*[contains(@text,"While using the app")]')

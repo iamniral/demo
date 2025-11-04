@@ -35,8 +35,9 @@ print(f"First Page title is: {title_text}")
 driver.find_element(*SmartThingsLocators.INTRO_ALLOW_BUTTON).click()
 driver.find_element(*SmartThingsLocators.MORE_BUTTON).click()
 driver.find_element(*SmartThingsLocators.CONTINUE_BUTTON).click()
-time.sleep(30) # Added for potential long loading/login process
-driver.find_element(*SmartThingsLocators.START_SMARTTHINGS_BUTTON).click()
+time.sleep(5) # Added for potential long loading/login process
+# driver.find_element(*SmartThingsLocators.START_SMARTTHINGS_BUTTON).click()
+driver.find_element(*SmartThingsLocators.SKIP_BUTTON).click()
 time.sleep(5)
 
 driver.find_element(*SmartThingsLocators.WHILE_USING_APP_PERMISSION).click()

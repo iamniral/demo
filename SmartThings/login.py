@@ -35,9 +35,10 @@ print(f"First Page title is: {title_text}")
 driver.find_element(*SmartThingsLocators.INTRO_ALLOW_BUTTON).click()
 driver.find_element(*SmartThingsLocators.MORE_BUTTON).click()
 driver.find_element(*SmartThingsLocators.CONTINUE_BUTTON).click()
-time.sleep(23)
-driver.find_element(*SmartThingsLocators.START_SMARTTHINGS_BUTTON).click()
-time.sleep(10)
+time.sleep(3)
+# driver.find_element(*SmartThingsLocators.START_SMARTTHINGS_BUTTON).click()
+driver.find_element(*SmartThingsLocators.SKIP_BUTTON).click()
+time.sleep(5)
 
 # Allow app permissions
 driver.find_element(*SmartThingsLocators.WHILE_USING_APP_PERMISSION).click()
@@ -53,7 +54,7 @@ time.sleep(3)
 
 # App Signin
 driver.find_element(*SmartThingsLocators.SIGN_IN_BUTTON).click()
-time.sleep(12)
+time.sleep(10)
 # Enter email ID
 driver.find_element(*SmartThingsLocators.EMAIL_INPUT).send_keys('iamniralshah@gmail.com')
 time.sleep(5)
@@ -62,7 +63,7 @@ time.sleep(5)
 # Enter password
 driver.find_element(*SmartThingsLocators.PASSWORD_INPUT).send_keys('Vasupujy@3')
 time.sleep(5)
-driver.find_element(*SmartThingsLocators.SIGN_IN_NOW_BUTTON).click()
+driver.find_element(*SmartThingsLocators.SIGN_IN_FINAL_BUTTON).click()
 time.sleep(15)
 home_screen = driver.find_element(*SmartThingsLocators.HOME_TITLE).text
 print(f"Home page title is: {home_screen}")
