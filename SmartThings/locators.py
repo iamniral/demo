@@ -41,3 +41,7 @@ class SmartThingsLocators:
     # --- Verification Message ---
     FOUND_ID_MESSAGE = (By.XPATH, '//android.widget.TextView[@text="We found 1 Email ID(s)."]')
     SIGN_IN_NOW_BUTTON = (By.XPATH, '//android.widget.Button[@text="Sign in now"]')
+
+    #--- Explore SmartThings ---
+    EXPLORE_SMARTTHINGS = (By.XPATH, '//android.widget.TextView[@resource-id="com.samsung.android.oneconnect:id/item_name" and @text="Explore SmartThings"]')
+    NAVIGATE_BACK = (By.XPATH, '//android.widget.Button[@content-desc="Navigate up"]')
