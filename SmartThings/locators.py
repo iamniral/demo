@@ -34,6 +34,7 @@ class SmartThingsLocators:
     FAMILY_NAME_INPUT = (By.XPATH, '//android.widget.EditText[@resource-id="familyName"]')
     DAY_INPUT = (By.XPATH, '//android.widget.EditText[@resource-id="day"]')
     MONTH_DROPDOWN = (By.XPATH, '//android.view.View[@resource-id="month"]')
+    MONTHS_DROPDOWN = (By.XPATH, '//android.widget.CheckedTextView[@resource-id="android:id/text1"]')
     JULY_OPTION = (By.XPATH, '//android.widget.CheckedTextView[@text="July"]')
     YEAR_INPUT = (By.XPATH, '//android.widget.EditText[@resource-id="year"]')
     FIND_ID_FINAL_BUTTON = (By.XPATH, '//android.widget.Button[@resource-id="findIdButton"]')

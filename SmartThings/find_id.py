@@ -36,20 +36,20 @@ print(f"First Page title is: {title_text}")
 driver.find_element(*SmartThingsLocators.INTRO_ALLOW_BUTTON).click()
 driver.find_element(*SmartThingsLocators.MORE_BUTTON).click()
 driver.find_element(*SmartThingsLocators.CONTINUE_BUTTON).click()
-time.sleep(5)
+time.sleep(2)
 # driver.find_element(*SmartThingsLocators.START_SMARTTHINGS_BUTTON).click()
 driver.find_element(*SmartThingsLocators.SKIP_BUTTON).click()
-time.sleep(5)
+time.sleep(3)
 
 # --- Allow Permissions ---
 driver.find_element(*SmartThingsLocators.WHILE_USING_APP_PERMISSION).click()
-time.sleep(3)
+time.sleep(2)
 # Permission 1
 driver.find_element(*SmartThingsLocators.PERMISSION_ALLOW_BUTTON).click()
-time.sleep(3)
+time.sleep(2)
 # Permission 2
 driver.find_element(*SmartThingsLocators.PERMISSION_ALLOW_BUTTON).click()
-time.sleep(3)
+time.sleep(2)
 
 home_title = driver.find_element(*SmartThingsLocators.HOME_TITLE).text
 print(f"The home screen title is: {home_title}")
@@ -57,28 +57,37 @@ time.sleep(3)
 
 # --- Find Account ID Flow ---
 driver.find_element(*SmartThingsLocators.SIGN_IN_BUTTON).click()
-time.sleep(15)
+time.sleep(5)
 driver.find_element(*SmartThingsLocators.FIND_ID_LINK).click()
-time.sleep(5)
+time.sleep(2)
 driver.find_element(*SmartThingsLocators.GIVEN_NAME_INPUT).send_keys('Niral')
-time.sleep(5)
+time.sleep(2)
 driver.find_element(*SmartThingsLocators.FAMILY_NAME_INPUT).send_keys('Shah')
-time.sleep(5)
+time.sleep(2)
 driver.find_element(*SmartThingsLocators.DAY_INPUT).send_keys('21')
-time.sleep(5)
+time.sleep(2)
 driver.find_element(*SmartThingsLocators.MONTH_DROPDOWN).click()
-time.sleep(5)
+time.sleep(2)
 
-WebDriverWait(driver, 10).until(
-    EC.element_to_be_clickable(SmartThingsLocators.JULY_OPTION)
-).click()
+target_month = "July"
+all_months = driver.find_elements(*SmartThingsLocators.MONTHS_DROPDOWN)
+print(len(all_months))
+
+for month in all_months:
+    if month.text == target_month:
+        month.click()
+        break
+
+# WebDriverWait(driver, 10).until(
+#     EC.element_to_be_clickable(SmartThingsLocators.JULY_OPTION)
+# ).click()
 
 driver.find_element(*SmartThingsLocators.YEAR_INPUT).send_keys('1993')
-time.sleep(5)
+time.sleep(2)
 driver.find_element(*SmartThingsLocators.FIND_ID_FINAL_BUTTON).click()
 
 # --- Assertion Step ---
-time.sleep(5)
+time.sleep(2)
 Found_ID_Element = driver.find_element(*SmartThingsLocators.FOUND_ID_MESSAGE)
 EXPECTED_TEXT = "We found 1 Email ID(s)."
 assert Found_ID_Element.text == EXPECTED_TEXT
