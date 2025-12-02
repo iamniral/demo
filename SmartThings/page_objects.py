@@ -1,3 +1,6 @@
+# Test Objective:
+# 1. Capture screenshot of explore section
+
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from locators import SmartThingsLocators  # Assumed to be available

@@ -1,3 +1,6 @@
+# Test Objective:
+# 1. Find my user id & if match found the print it - Enter data, Select date from calender
+
 import time
 from appium import webdriver
 from appium.options.common import AppiumOptions

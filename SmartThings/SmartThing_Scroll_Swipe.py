@@ -1,3 +1,7 @@
+# Test Objective:
+# 1. Scroll & swipe in explore section
+# 2. Navigate back after scrolling
+
 import time
 
 from selenium.webdriver import ActionChains

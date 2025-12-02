@@ -1,3 +1,6 @@
+# Test Objective:
+# 1. Capture video of scroll section
+
 import base64
 import os
 import time

@@ -1,3 +1,9 @@
+# Test Objective:
+# 1. Launch the app
+# 2. Accept the permission
+# 3. Redirect to Home screen & print home screen name
+
+
 import time
 
 from app_launch import getdriver
