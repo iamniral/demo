@@ -4,9 +4,9 @@ from conftest import ROOT_DIR
 
 config = configparser.ConfigParser()
 config.sections()
-config.read(f"{ROOT_DIR}/config.ini")
+config.read("..\\ConfigurationData\\config.ini")
 
-class Options():
+class Options:
 
     def get_options(self):
         options = UiAutomator2Options()
