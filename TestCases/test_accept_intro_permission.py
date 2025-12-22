@@ -1,9 +1,21 @@
-from driver_manager.driver import Driver
-from screens.intro_screen import IntroScreen
+from Pages.AppPermissionScreen import AppPermissionScreen
+from Pages.HomeScreen import HomeScreen
+from Pages.IntroScreen import IntroScreen
+from TestCases.BaseTest import BaseTest
 
 
-class TestAcceptIntroPermissionTest:
+class TestAcceptIntroPermissionTest(BaseTest):
+
     def test_accept_intro_permission(self):
-        driver = Driver().create_driver_and_return()
-        intro_screen = IntroScreen(driver)
-        intro_screen.accept_intro_permission()
+        intro = IntroScreen(self.driver)
+        permission = AppPermissionScreen(self.driver)
+        intro.introAllow()
+        permission.allowAppPermission()
+
+
+
+
+
+
+
+

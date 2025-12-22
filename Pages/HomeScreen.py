@@ -1,15 +1,12 @@
 from Pages.BasePage import BasePage
-from SmartThings.locators import SmartThingsLocators
-from driver_manager import driver
 
 
 class HomeScreen(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-    def gotoSignIn(self):
+    def click_on_Signin(self):
+        self.wait_for_element_to_be_visible("SIGN_IN_BUTTON").click()
 
-        driver.find_element(*SmartThingsLocators.SIGN_IN).click()
-        self.wait_for_element_to_be_visible(INTRO_TITLE_XPATH)
-
-
+    def click_on_Explore_SmartThings(self):
+        self.wait_for_element_to_be_visible("EXPLORE_SMARTTHINGS").click()
